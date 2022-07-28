@@ -3,6 +3,7 @@ body{
     height: 877px;
     font-family: 'Roboto', sans-serif;
     margin: 0 auto;
+    background: #E5E5E5;
 }
 
 
@@ -31,6 +32,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .option h2{
@@ -49,6 +51,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .movies-box img{
@@ -60,4 +63,46 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    background-color: white;
+}
+
+.movies-dates{
+    background-color: white;
+}
+
+.date{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #293845;
+}
+
+.day{
+    margin-left: 20px;
+}
+
+.times{
+    display: flex;
+    justify-content: left;
+}
+
+.showtime{
+    width: 83px;
+    height: 43px;
+    background: #E8833A;
+    border-radius: 3px;
+    margin: 22px 8px 23px 0px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
 }
