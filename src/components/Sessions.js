@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams} from "react-router-dom";
 import Top from "./Top";
 import axios from "axios";
+import Footer from "./Footer";
 
 export default function Sessions() {
     const params = useParams();
@@ -25,10 +26,11 @@ return(
     <Top title={"Selecione o horário"}/>
     <ul className="movies-dates">
       {days.map((day) => (
-         <Day weekday={day.weekday} date={day.date} showtimes={day.showtimes}/>
+         <Day IDSession={day.id} weekday={day.weekday} date={day.date} showtimes={day.showtimes}/>
          
       ))}
     </ul>
+    <Footer image={sessions.posterURL} titlemovie={sessions.title}/>
     </>
 )
 
@@ -36,17 +38,21 @@ function Day({weekday,date,showtimes}){
     return(
         <div className="day">
             <div className="date">{weekday} - {date}</div>
-            <div className="times">
+           <div className="times">
                 {showtimes.map(showtime=> <Showtime showtime={showtime.name} id={showtime.id}/>)}
             </div>
+
         </div>
     );
 }
 
-function Showtime({showtime, id}){
+function Showtime({IDSession,showtime}){
+
+    console.log(showtime.id)
     return(
-        
+        <Link to={`/showtimes/${IDSession}/seats`}>
             <div className="showtime">{showtime}</div>
+        </Link>
      
     );
 }}
