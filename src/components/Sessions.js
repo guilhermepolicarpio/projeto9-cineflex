@@ -11,7 +11,7 @@ export default function Sessions() {
 
   useEffect(() => {
     const requisicao = axios.get(
-      `https://mock-api.driven.com.br/api/v5/cineflex/movies/${params.id}/showtimes`
+      `https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.id}/showtimes`
     );
 
     requisicao.then((res) => {
@@ -35,22 +35,24 @@ return(
 )
 
 function Day({weekday,date,showtimes}){
+
+  
     return(
         <div className="day">
             <div className="date">{weekday} - {date}</div>
            <div className="times">
-                {showtimes.map(showtime=> <Showtime showtime={showtime.name} id={showtime.id}/>)}
+                {showtimes.map(showtime=> <Showtime key={showtime.id} showtime={showtime.name} id={showtime.id}/>)}
             </div>
 
         </div>
     );
 }
 
-function Showtime({IDSession,showtime}){
+function Showtime({id,showtime}){
 
-    console.log(showtime.id)
+    console.log(id)
     return(
-        <Link to={`/showtimes/${IDSession}/seats`}>
+        <Link to={`/showtimes/${id}/seats`}>
             <div className="showtime">{showtime}</div>
         </Link>
      

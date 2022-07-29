@@ -1,4 +1,4 @@
-export default function Footer({image,titlemovie}){
+export default function Footer({image,titlemovie,showtime,day,hours}){
 
     return(
     <div className="footer-container">
@@ -8,7 +8,10 @@ export default function Footer({image,titlemovie}){
             </div>
         </div>
         <div className='title-selected-movie'>
-            <div className='title'>{titlemovie}</div>
+            <div>{titlemovie}</div>
+            <div className='title-selected-movie-box'>{showtime}</div>
+            <div className='title-selected-movie-box'>{day} {hours}</div>
+
         </div>
     </div>
     )
