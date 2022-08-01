@@ -1,6 +1,6 @@
 import Top from "./Top";
 import Footer from "./Footer";
-import { useParams } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -10,6 +10,9 @@ export default function Seats(){
     const [movies,setMovies]= useState([]);
     const [days,setDays]= useState([]);
     const [hours,setHours]= useState([]);
+    const [name,setName]=useState([]);
+    const [cpf,setCpf]=useState([]);
+    const [ids,setIds]= useState([]);
 
     useEffect(() => {
         
@@ -21,74 +24,66 @@ export default function Seats(){
             setHours(res.data.name)
         });
 	}, []);
-
-    console.log(seats)
     
+    function adicionarAssento(id){
+        setIds([...ids,parseInt(id)]); 
+    }
+
+    function sendRequest(){
+        const objetoEnviado={
+            ids: ids,
+            name: name,
+            cpf: cpf
+        }
+
+        console.log(objetoEnviado)
+         
+        const request=axios.post("https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many",objetoEnviado);
+        request.then(answer=>console.log(answer));
+      
+    }
+
     return(
     <>
     <Top title={"Selecione o(s) assento(s)"}/>
     <div>
-    <Place seats={seats}/>
-    <Form/>
+    <div className="seats">
+           {seats.map(local => <Local key={local.id} number={local.name} available={local.isAvailable} adicionarAssento={adicionarAssento}/>)}
+        </div>
+    <form > 
+        <div className="forms">
+                <h1>Nome do comprador</h1>
+                <input onChange={e=>setName(e.target.value)} type="text" placeholder="    Digite seu nome..."/>
+                <h1>CPF do comprador</h1>
+                <input onChange={e=>setCpf(e.target.value)}type="text" placeholder="    Digite seu CPF..."/>
+        </div>
+        </form>
     <Legend />
     </div>
-    <Button/>
+    <Link to={"/sucesso"}>
+
+    <div className="button-box">
+            
+            <button onClick={()=>sendRequest()}>Reservar assento(s)</button>
+    </div>
+    </Link>
     <Footer image={movies.posterURL} titlemovie={movies.title} day={days.weekday} hours={hours}/>
     </>
     )
 }
 
-function Place({seats}){
-    return (
-        <div className="seats">
-           {seats.map(local => <Local number={local.name} available={local.isAvailable}/>)}
-        </div>
-    )
-}
+function Local({number, available,adicionarAssento}){
 
-function Local({number, available}){
-
-
-    let [selecionavel, setSelecionavel] = useState(available)
-    let css = ""
-    selecionavel ? (css = `cadeira true`) : (css = `cadeira selecionado`)
-    
-
-    return (
-        <>
-            {available ?
-                <div className={css} onClick={() => setSelecionavel(!selecionavel)}>
-                    {number}
-                </div>
-                :
-                <div className="cadeira false" onClick={() => alert("Esse assento não está disponível")}>
-                    {number}
-                </div>
-                }
-        </>
-    )
-}
-function Button(){
-    return (
-        
-            <div className="button-box">
-                <button>Reservar assento(s)</button>
-            </div>
-     
-    )
-}
-
-function Form(){
-    return(
-        <form > 
-        <div class="forms">
-                <h1>Nome do comprador</h1>
-                <input type="text" placeholder="    Digite seu nome..."/>
-                <h1>CPF do comprador</h1>
-                <input type="text" placeholder="    Digite seu CPF..."/>
-        </div>
-        </form>
-    )
+    if(available===true){
+        return (
+            <div className="cadeira true" onClick={()=>adicionarAssento(number)}>{number} </div>
+        );
+    }
+    else{
+        return (
+            <div className="cadeira false" onClick={()=>alert("Alguém já reservou este assento!")}>{number}</div>
+        )
+    }
 }
 
 function Legend(){
@@ -109,4 +104,3 @@ function Legend(){
         </div>
     )
 }
-

@@ -6,6 +6,9 @@ body{
     background: #E5E5E5;
 }
 
+a{
+    text-decoration: none;
+}
 
 .top{
     width:100%;
@@ -219,7 +222,7 @@ margin-bottom: 5px;
     display: flex;
     justify-content: center;
     background-color: white;
-    padding-bottom: 30px;
+    padding: 15px 0px 15px 0px;
 }
 
 button{
@@ -256,4 +259,32 @@ button{
     background-color: white;
     gap: 7px;
     padding: 5px 6px 15px 6px;
+}
+
+.option h4{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+
+    color: #247A6B;
+}
+
+.success-title h2{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+    margin-left: 28px;
+    color: #293845;
+}
+
+.succsess-container{
+    width: 375px;
+    background-color: white;
 }

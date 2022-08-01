@@ -4,7 +4,7 @@ import Top from "./Top";
 import axios from "axios";
 import Footer from "./Footer";
 
-export default function Sessions() {
+export default function Sessions({}) {
     const params = useParams();
     const [sessions, setSessions] = useState([]);
     const [days,setDays]=useState([]);
@@ -26,7 +26,7 @@ return(
     <Top title={"Selecione o horário"}/>
     <ul className="movies-dates">
       {days.map((day) => (
-         <Day IDSession={day.id} weekday={day.weekday} date={day.date} showtimes={day.showtimes}/>
+         <Day key={day.id} IDSession={day.id} weekday={day.weekday} date={day.date} showtimes={day.showtimes}/>
          
       ))}
     </ul>
@@ -50,7 +50,6 @@ function Day({weekday,date,showtimes}){
 
 function Showtime({id,showtime}){
 
-    console.log(id)
     return(
         <Link to={`/showtimes/${id}/seats`}>
             <div className="showtime">{showtime}</div>
